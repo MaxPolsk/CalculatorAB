@@ -153,6 +153,7 @@
             <option value="100:2">Силикон (100:2)</option>
             <option value="10:1">Эпоксидный клей (10:1)</option>
             <option value="60:40">Литьевой пластик (60:40)</option>
+            <option value="100:60">Литьевой пластик (100:60)</option> <!-- Новый параметр -->
             <option value="1:2.5">Акриловый гипс (1:2.5)</option>
         </select>
         <br><br>
@@ -177,8 +178,8 @@
                     <label for="componentA">Количество компонента A (г):</label>
                     <input type="number" id="componentA" placeholder="Введите вес">
                 `;
-            } else if (ratio === "60:40" || ratio === "1:2.5") {
-                // Для материалов с соотношениями 60:40 и 1:2.5
+            } else if (ratio === "60:40" || ratio === "100:60" || ratio === "1:2.5") {
+                // Для материалов с соотношениями 60:40, 100:60 и 1:2.5
                 inputFieldsDiv.innerHTML = `
                     <label for="totalWeight">Общий вес (г):</label>
                     <input type="number" id="totalWeight" placeholder="Введите общий вес">
@@ -210,8 +211,8 @@
 
                 const componentB = (componentA * ratioB) / ratioA;
                 document.getElementById('result').innerHTML = `Компонент B: ${componentB.toFixed(2)} г`;
-            } else if (ratio === "60:40" || ratio === "1:2.5") {
-                // Расчет для соотношений 60:40 и 1:2.5
+            } else if (ratio === "60:40" || ratio === "100:60" || ratio === "1:2.5") {
+                // Расчет для соотношений 60:40, 100:60 и 1:2.5
                 const totalWeight = parseFloat(document.getElementById('totalWeight').value);
 
                 if (isNaN(totalWeight) || totalWeight <= 0) {
@@ -223,6 +224,9 @@
                 if (ratio === "60:40") {
                     ratioA = 60;
                     ratioB = 40;
+                } else if (ratio === "100:60") {
+                    ratioA = 100;
+                    ratioB = 60;
                 } else if (ratio === "1:2.5") {
                     ratioA = 1;
                     ratioB = 2.5;

@@ -1,10 +1,10 @@
 {
-  "name": "Калькулятор АБ",
+  "name": "Калькулятор компонентов A и B",
   "short_name": "CalcAB",
   "start_url": "/CalculatorAB/index.html",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "background_color": "#556B2F",
+  "theme_color": "#556B2F",
   "icons": [
     {
       "src": "icons/icon-192x192.png",

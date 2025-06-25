@@ -6,6 +6,13 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>Калькулятор компонентов A и B</title>
 
+    <!-- PWA-конфигурация -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#556B2F">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+
     <!-- Иконка для всех типов браузеров -->
     <link rel="icon" href="https://maxpolsk.github.io/CalculatorAB/icons8-калькулятор-100.png" type="image/png">
     <link rel="shortcut icon" href="https://maxpolsk.github.io/CalculatorAB/icons8-калькулятор-100.png" type="image/png">
@@ -124,6 +131,21 @@
             font-weight: bold; /* Жирный шрифт для результата */
         }
 
+        /* Стиль для уведомления об офлайн-режиме */
+        .offline-notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ff9800;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 1000;
+        }
+
         @media (max-width: 480px) {
             .calculator {
                 padding: 20px;
@@ -140,6 +162,9 @@
     </style>
 </head>
 <body>
+    <!-- Уведомление о работе в офлайн-режиме -->
+    <div class="offline-notification" id="offlineNotification">Работа в офлайн-режиме</div>
+    
     <!-- Логотип -->
     <div class="logo">
         <img src="логотип-5.png" alt="Логотип" style="width: 150px; height: auto;"> <!-- Увеличенный логотип -->
@@ -246,7 +271,35 @@
         document.addEventListener('DOMContentLoaded', () => {
             updateInputFields();
             document.getElementById('ratio').addEventListener('change', updateInputFields);
+            
+            // Проверка онлайн-статуса
+            updateOnlineStatus();
+            window.addEventListener('online', updateOnlineStatus);
+            window.addEventListener('offline', updateOnlineStatus);
         });
+
+        // Обновление статуса онлайн/офлайн
+        function updateOnlineStatus() {
+            const notification = document.getElementById('offlineNotification');
+            if (!navigator.onLine) {
+                notification.style.display = 'block';
+            } else {
+                notification.style.display = 'none';
+            }
+        }
+
+        // Регистрация Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(registration => {
+                        console.log('Service Worker зарегистрирован:', registration);
+                    })
+                    .catch(error => {
+                        console.log('Ошибка регистрации Service Worker:', error);
+                    });
+            });
+        }
     </script>
 </body>
 </html>

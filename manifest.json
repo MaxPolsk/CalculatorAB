@@ -5,6 +5,8 @@
   "display": "standalone",
   "background_color": "#556B2F",
   "theme_color": "#556B2F",
+  "description": "Приложение для расчёта пропорций компонентов",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "icons/icon-192x192.png",

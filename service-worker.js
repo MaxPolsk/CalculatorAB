@@ -1,9 +1,10 @@
-const CACHE_NAME = 'calc-ab-v2';
+const CACHE_NAME = 'calculator-v3';
 const urlsToCache = [
-  '/CalculatorAB/index.html',
   '/CalculatorAB/',
-  'https://maxpolsk.github.io/CalculatorAB/icons8-калькулятор-100.png',
-  '/CalculatorAB/styles.css'
+  '/CalculatorAB/index.html',
+  '/CalculatorAB/icon.png',
+  '/CalculatorAB/styles.css',
+  '/CalculatorAB/script.js'
 ];
 
 self.addEventListener('install', event => {
@@ -13,18 +14,8 @@ self.addEventListener('install', event => {
   );
 });
 
-self.addEventListener('activate', event => {
-  event.waitUntil(
-    caches.keys().then(keys => 
-      Promise.all(keys.map(key => 
-        key !== CACHE_NAME ? caches.delete(key) : null
-      ))
-  );
-});
-
 self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request)
       .then(response => response || fetch(event.request))
-  );
 });

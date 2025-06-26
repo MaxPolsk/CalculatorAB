@@ -1,15 +1,16 @@
-const CACHE_NAME = 'calc-ab-v1';
+const CACHE_NAME = 'calc-ab-v2';
 const urlsToCache = [
   '/CalculatorAB/index.html',
   '/CalculatorAB/',
-  '/CalculatorAB/логотип-5.png',
-  'https://maxpolsk.github.io/CalculatorAB/icons8-калькулятор-100.png'
+  'https://maxpolsk.github.io/CalculatorAB/icons8-калькулятор-100.png',
+  '/CalculatorAB/styles.css'
 ];
 
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => cache.addAll(urlsToCache))
+  );
 });
 
 self.addEventListener('activate', event => {

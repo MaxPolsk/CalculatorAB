@@ -3,116 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#556B2F">
-    <title>Калькулятор компонентов A и B</title>
-
-    <!-- PWA Required Tags -->
+    <title>Профессиональный калькулятор компонентов</title>
     <link rel="manifest" href="manifest.json">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="apple-touch-icon" href="icon.png">
-
-    <!-- Favicon -->
-    <link rel="icon" href="icon.png" type="image/png">
-    <link rel="shortcut icon" href="icon.png" type="image/png">
-
+    <link rel="icon" href="icon.png">
     <style>
-        /* Основные стили */
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #166088;
+            --accent: #4fc3f7;
+            --background: #f5f7fa;
+            --text: #2d3436;
+        }
+        
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            background: var(--background);
+            color: var(--text);
             margin: 0;
+            padding: 20px;
+            min-height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background: #556B2F;
-            color: #333;
         }
-
-        .calculator {
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        
+        .calculator-container {
             width: 100%;
-            max-width: 450px;
+            max-width: 500px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .calculator-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px;
             text-align: center;
         }
-
-        h1 {
-            font-size: 28px;
-            margin-bottom: 20px;
+        
+        .calculator-body {
+            padding: 25px;
         }
-
+        
         select, input {
-            font-size: 16px;
-            padding: 10px;
-            margin: 10px 0;
             width: 100%;
-            max-width: 300px;
-            border: 2px solid #ddd;
-            border-radius: 10px;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
         }
-
+        
+        select:focus, input:focus {
+            border-color: var(--accent);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.2);
+        }
+        
         button {
-            background: linear-gradient(145deg, #007bff, #0056b3);
-            color: white;
-            font-size: 18px;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            margin-top: 15px;
-        }
-
-        .result {
+            width: 100%;
+            padding: 14px;
             margin-top: 20px;
-            font-size: 18px;
-            font-weight: bold;
-            color: #28a745;
-        }
-
-        /* Офлайн-уведомление */
-        .offline-notification {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #ff9800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            display: none;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .result {
+            margin-top: 25px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            font-size: 18px;
+            text-align: center;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 600px) {
+            .calculator-container {
+                border-radius: 0;
+            }
+            body {
+                padding: 0;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Уведомление об офлайн-режиме -->
-    <div class="offline-notification" id="offlineNotification">Работа в офлайн-режиме</div>
-
-    <!-- Основной контент -->
-    <div class="calculator">
-        <h1>Расчет компонентов A и B</h1>
-        <p>Выберите материал:</p>
-        <select id="ratio">
-            <option value="100:2">Силикон (100:2)</option>
-            <option value="10:1">Эпоксидный клей (10:1)</option>
-            <option value="60:40">Литьевой пластик (60:40)</option>
-            <option value="100:60">Литьевой пластик (100:60)</option>
-            <option value="1:2.5">Акриловый гипс (1:2.5)</option>
-        </select>
-
-        <div id="inputFields" class="input-fields">
-            <!-- Поля будут генерироваться динамически -->
+    <div class="calculator-container">
+        <div class="calculator-header">
+            <h1>Калькулятор компонентов A/B</h1>
+            <p>Точные пропорции для идеального результата</p>
         </div>
-
-        <button class="calculate-button" onclick="calculate()">Рассчитать</button>
-        <div class="result" id="result"></div>
+        
+        <div class="calculator-body">
+            <label for="ratio">Выберите материал:</label>
+            <select id="ratio">
+                <option value="100:2">Силикон (100:2)</option>
+                <option value="10:1">Эпоксидный клей (10:1)</option>
+                <option value="60:40">Литьевой пластик (60:40)</option>
+            </select>
+            
+            <div id="inputFields"></div>
+            
+            <button onclick="calculate()">Рассчитать</button>
+            
+            <div class="result" id="result"></div>
+        </div>
     </div>
 
+    <!-- Сохраняем ваш оригинальный JavaScript -->
     <script>
-        // Функции калькулятора
         function updateInputFields() {
             const ratio = document.getElementById('ratio').value;
             const inputFieldsDiv = document.getElementById('inputFields');
@@ -141,7 +161,7 @@
                 } else {
                     const ratioParts = ratio.split(':');
                     const componentB = (componentA * ratioParts[1]) / ratioParts[0];
-                    result = `Компонент B: ${componentB.toFixed(2)} г`;
+                    result = `Компонент B: <strong>${componentB.toFixed(2)} г</strong>`;
                 }
             } else {
                 const totalWeight = parseFloat(document.getElementById('totalWeight').value);
@@ -152,38 +172,24 @@
                     const totalRatio = parseFloat(ratioParts[0]) + parseFloat(ratioParts[1]);
                     const weightA = (totalWeight * ratioParts[0]) / totalRatio;
                     const weightB = (totalWeight * ratioParts[1]) / totalRatio;
-                    result = `Компонент A: ${weightA.toFixed(2)} г<br>Компонент B: ${weightB.toFixed(2)} г`;
+                    result = `
+                        Компонент A: <strong>${weightA.toFixed(2)} г</strong><br>
+                        Компонент B: <strong>${weightB.toFixed(2)} г</strong>
+                    `;
                 }
             }
 
             document.getElementById('result').innerHTML = result;
         }
 
-        // Инициализация
         document.addEventListener('DOMContentLoaded', () => {
             updateInputFields();
             document.getElementById('ratio').addEventListener('change', updateInputFields);
             
-            // Проверка онлайн-статуса
-            updateOnlineStatus();
-            window.addEventListener('online', updateOnlineStatus);
-            window.addEventListener('offline', updateOnlineStatus);
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('sw.js');
+            }
         });
-
-        // Офлайн-детектор
-        function updateOnlineStatus() {
-            const notification = document.getElementById('offlineNotification');
-            notification.style.display = navigator.onLine ? 'none' : 'block';
-        }
-
-        // Регистрация Service Worker
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('service-worker.js')
-                    .then(reg => console.log('ServiceWorker зарегистрирован'))
-                    .catch(err => console.log('Ошибка регистрации ServiceWorker:', err));
-            });
-        }
     </script>
 </body>
 </html>

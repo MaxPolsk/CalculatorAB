@@ -59,6 +59,20 @@
             margin-bottom: 15px;
         }
         
+        .logo-link {
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .logo-link:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+        
+        .logo-link:active {
+            transform: scale(0.98);
+        }
+        
         .logo {
             height: 70px;
             max-width: 100%;
@@ -189,7 +203,10 @@
     <div class="calculator">
         <div class="calculator-header">
             <div class="logo-container">
-                <img src="логотип-5.png" alt="Логотип компании" class="logo">
+                <!-- Ссылка на ваше сообщество ВКонтакте -->
+                <a href="https://vk.com/polskys_sculptmast" class="logo-link" target="_blank">
+                    <img src="логотип-5.png" alt="SculptMast - Сообщество ВКонтакте" class="logo">
+                </a>
             </div>
             <h1>КАЛЬКУЛЯТОР КОМПОНЕНТОВ A/B</h1>
             <p>Точные пропорции для профессиональных результатов</p>

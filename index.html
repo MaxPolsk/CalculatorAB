@@ -23,11 +23,16 @@
             --font-body: 'Roboto', sans-serif;
         }
         
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
         body {
             font-family: var(--font-body);
             background: var(--background);
             color: var(--text);
-            margin: 0;
             padding: 20px;
             min-height: 100vh;
             display: flex;
@@ -53,10 +58,18 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
         }
         
         .logo-container {
             margin-bottom: 15px;
+            background: white; /* Белый фон под логотипом */
+            border-radius: 50%; /* Круглая форма */
+            padding: 8px; /* Отступ вокруг логотипа */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
         }
         
         .logo-link {
@@ -75,15 +88,16 @@
         
         .logo {
             height: 70px;
-            max-width: 100%;
+            width: 70px;
             object-fit: contain;
+            display: block;
         }
         
         .calculator-header h1 {
             font-family: var(--font-heading);
             font-weight: 700;
             font-size: 26px;
-            margin: 10px 0 5px;
+            margin: 15px 0 5px;
             letter-spacing: 0.5px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
@@ -195,6 +209,10 @@
             }
             .calculator-body {
                 padding: 25px 20px;
+            }
+            .logo {
+                height: 60px;
+                width: 60px;
             }
         }
     </style>

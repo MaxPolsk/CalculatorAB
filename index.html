@@ -6,10 +6,8 @@
     <title>Профессиональный калькулятор компонентов</title>
     <link rel="manifest" href="manifest.json">
     <link rel="icon" href="icon.png">
-    
     <!-- Подключаем красивые шрифты -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    
     <style>
         :root {
             --primary: #556B2F;
@@ -17,18 +15,15 @@
             --accent: #8FBC8F;
             --background: #f5f5f5;
             --text: #333;
-            
             /* Шрифты */
             --font-heading: 'Montserrat', sans-serif;
             --font-body: 'Roboto', sans-serif;
         }
-        
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
-        
         body {
             font-family: var(--font-body);
             background: var(--background);
@@ -40,7 +35,6 @@
             align-items: center;
             line-height: 1.6;
         }
-        
         .calculator {
             width: 100%;
             max-width: 500px;
@@ -49,7 +43,6 @@
             box-shadow: 0 8px 30px rgba(0,0,0,0.12);
             overflow: hidden;
         }
-        
         .calculator-header {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
@@ -60,7 +53,6 @@
             align-items: center;
             position: relative;
         }
-        
         .logo-container {
             margin-bottom: 15px;
             background: white; /* Белый фон под логотипом */
@@ -71,28 +63,23 @@
             justify-content: center;
             align-items: center;
         }
-        
         .logo-link {
             display: inline-block;
             transition: all 0.3s ease;
         }
-        
         .logo-link:hover {
             transform: scale(1.05);
             opacity: 0.9;
         }
-        
         .logo-link:active {
             transform: scale(0.98);
         }
-        
         .logo {
             height: 70px;
             width: 70px;
             object-fit: contain;
             display: block;
         }
-        
         .calculator-header h1 {
             font-family: var(--font-heading);
             font-weight: 700;
@@ -101,18 +88,15 @@
             letter-spacing: 0.5px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
-        
         .calculator-header p {
             font-size: 16px;
             opacity: 0.9;
             margin-top: 5px;
             font-weight: 300;
         }
-        
         .calculator-body {
             padding: 30px 25px;
         }
-        
         select, input {
             width: 100%;
             padding: 14px;
@@ -124,14 +108,12 @@
             background: #fafafa;
             transition: all 0.3s ease;
         }
-        
         select:focus, input:focus {
             border-color: var(--accent);
             outline: none;
             box-shadow: 0 0 0 3px rgba(143, 188, 143, 0.2);
             background: white;
         }
-        
         button {
             width: 100%;
             padding: 16px;
@@ -147,16 +129,13 @@
             letter-spacing: 0.5px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-        
         button:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
-        
         button:active {
             transform: translateY(1px);
         }
-        
         .result {
             margin-top: 25px;
             padding: 20px;
@@ -167,16 +146,13 @@
             border-left: 4px solid var(--accent);
             animation: fadeIn 0.4s ease-out;
         }
-        
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
         .input-group {
             margin-bottom: 20px;
         }
-        
         label {
             display: block;
             margin-bottom: 8px;
@@ -184,7 +160,6 @@
             font-size: 16px;
             color: #444;
         }
-        
         .material-badge {
             display: inline-block;
             padding: 5px 12px;
@@ -195,7 +170,6 @@
             font-weight: 500;
             margin-top: 10px;
         }
-        
         /* Адаптивность */
         @media (max-width: 600px) {
             body {
@@ -222,14 +196,13 @@
         <div class="calculator-header">
             <div class="logo-container">
                 <!-- Ссылка на ваше сообщество ВКонтакте -->
-                <a href="https://vk.com/polskys_sculptmast" class="logo-link" target="_blank">
+                <a href=" https://vk.com/polskys_sculptmast " class="logo-link" target="_blank">
                     <img src="логотип-5.png" alt="SculptMast - Сообщество ВКонтакте" class="logo">
                 </a>
             </div>
             <h1>КАЛЬКУЛЯТОР КОМПОНЕНТОВ A/B</h1>
             <p>Точные пропорции для профессиональных результатов</p>
         </div>
-        
         <div class="calculator-body">
             <div class="input-group">
                 <label for="ratio">Выберите материал:</label>
@@ -240,25 +213,21 @@
                     <option value="100:60">Литьевой пластик (100:60)</option>
                     <option value="100:40">Пенополиуретан (100:40)</option>
                     <option value="1:2.5">Акриловый гипс (1:2.5)</option>
+                    <option value="100:50">Литьевой пластик (100:50)</option> <!-- Новый материал -->
                 </select>
             </div>
-            
             <div id="inputFields" class="input-group">
                 <!-- Поля будут генерироваться динамически -->
             </div>
-            
             <button onclick="calculate()">РАССЧИТАТЬ ПРОПОРЦИИ</button>
-            
             <div class="result" id="result"></div>
         </div>
     </div>
-
     <script>
         function updateInputFields() {
             const ratio = document.getElementById('ratio').value;
             const inputFieldsDiv = document.getElementById('inputFields');
             inputFieldsDiv.innerHTML = '';
-
             if (ratio === "100:2" || ratio === "10:1") {
                 inputFieldsDiv.innerHTML = `
                     <label for="componentA">Количество компонента A (г):</label>
@@ -272,19 +241,15 @@
                 `;
             }
         }
-
         function calculate() {
             const ratio = document.getElementById('ratio').value;
             let result = "";
-
             if (ratio === "100:2" || ratio === "10:1") {
                 const componentA = parseFloat(document.getElementById('componentA').value);
-
                 if (isNaN(componentA) || componentA <= 0) {
                     document.getElementById('result').innerHTML = "Ошибка: Введите положительное число.";
                     return;
                 }
-
                 let ratioA, ratioB;
                 if (ratio === "100:2") {
                     ratioA = 100;
@@ -293,18 +258,15 @@
                     ratioA = 10;
                     ratioB = 1;
                 }
-
                 const componentB = (componentA * ratioB) / ratioA;
                 result = `Компонент B: <strong>${componentB.toFixed(2)} г</strong>`;
             } 
             else {
                 const totalWeight = parseFloat(document.getElementById('totalWeight').value);
-
                 if (isNaN(totalWeight) || totalWeight <= 0) {
                     document.getElementById('result').innerHTML = "Ошибка: Введите положительное число.";
                     return;
                 }
-
                 let ratioA, ratioB;
                 if (ratio === "60:40") {
                     ratioA = 60;
@@ -318,27 +280,25 @@
                 } else if (ratio === "1:2.5") {
                     ratioA = 1;
                     ratioB = 2.5;
+                } else if (ratio === "100:50") {
+                    ratioA = 100;
+                    ratioB = 50;
                 }
-
                 const totalRatio = ratioA + ratioB;
                 const weightA = (totalWeight * ratioA) / totalRatio;
                 const weightB = (totalWeight * ratioB) / totalRatio;
-
                 result = `
                     Компонент A: <strong>${weightA.toFixed(2)} г</strong><br>
                     Компонент B: <strong>${weightB.toFixed(2)} г</strong>
                     <div class="material-badge">Соотношение: ${ratioA}:${ratioB}</div>
                 `;
             }
-
             document.getElementById('result').innerHTML = result;
         }
-
         // Инициализация
         document.addEventListener('DOMContentLoaded', () => {
             updateInputFields();
             document.getElementById('ratio').addEventListener('change', updateInputFields);
-            
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register('sw.js');
             }
